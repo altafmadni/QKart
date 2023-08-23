@@ -17,6 +17,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -68,6 +69,7 @@ public class QkartSanity {
         // Save the last generated username
         lastGeneratedUserName = registration.lastGeneratedUsername;
 
+
         // Visit the login page and login with the previuosly registered user
         Login login = new Login(driver);
         login.navigateToLoginPage();
@@ -115,10 +117,12 @@ public class QkartSanity {
         // If status is true, then registration succeeded, else registration has
         // failed. In this case registration failure means Success
         logStatus("End TestCase", "Test Case 2: Verify user Registration : ", status ? "FAIL" : "PASS");
+        System.out.println(status);
         return !status;
     }
 
     public static void main(String[] args) throws InterruptedException, MalformedURLException {
+    RemoteWebDriver driver = createDriver();
         int totalTests = 0;
         int passedTests = 0;
         Boolean status;
@@ -136,7 +140,7 @@ public class QkartSanity {
 
             System.out.println("");
 
-            // Execute Test Case 2
+            //Execute Test Case 2
             totalTests += 1;
             status = TestCase02(driver);
             if (status) {
