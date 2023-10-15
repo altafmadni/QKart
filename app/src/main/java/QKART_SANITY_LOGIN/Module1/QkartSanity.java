@@ -178,7 +178,7 @@ public class QkartSanity {
         // SLEEP_STMT_01 : Wait for Page to Load
 
         // Search for the "yonex" product
-        status = homePage.searchForProduct("YONEX");
+        status = homePage.searchForProduct("yonex");
         if (!status) {
             logStatus("TestCase 3", "Test Case Failure. Unable to search for given product",
                     "FAIL");
