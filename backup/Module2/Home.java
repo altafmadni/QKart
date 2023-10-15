@@ -1,15 +1,12 @@
 package QKART_SANITY_LOGIN.Module1;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Home {
@@ -32,7 +29,6 @@ public class Home {
             WebElement logout_button = driver.findElement(By.className("MuiButton-text"));
             logout_button.click();
 
-            // SLEEP_STMT_10: Wait for Logout to complete
             // Wait for Logout to Complete
             Thread.sleep(3000);
 
@@ -55,12 +51,8 @@ public class Home {
 
             WebElement searchBox = driver.findElement(By.xpath("//*[@id='root']/div/div/div[1]/div[2]/div/input"));
             searchBox.clear();
-            //Enter product name in the search box.
             searchBox.sendKeys(product);
-            WebDriverWait wait = new WebDriverWait(driver, 30);
-            wait.until(ExpectedConditions.or(ExpectedConditions.presenceOfElementLocated(By.xpath("//h4[text()=' No products found ']")),
-            ExpectedConditions.presenceOfElementLocated(By.xpath("//button[text()='Add to cart']"))));           
-            
+            Thread.sleep(3000);
             return true;
         } catch (Exception e) {
             System.out.println("Error while searching for a product: " + e.getMessage());
@@ -127,7 +119,6 @@ public class Home {
 
             for(WebElement product : productTitle){
                 if(product.getText().contains(productName)){
-                    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                     WebElement addToCartButton = product.findElement(By.xpath(".//../..//button[text()='Add to cart']"));
                     addToCartButton.click();
                     return true;
@@ -171,6 +162,7 @@ public class Home {
             List<WebElement> itemsInCart = driver.findElements(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div/div/div[2]"));
             System.out.println("Items in cart"+itemsInCart.size());
             for(WebElement item : itemsInCart){
+                Thread.sleep(2000);
                 WebElement itemTitle = item.findElement(By.xpath(".//div[1]"));
                 System.out.println("Product Title = "+ itemTitle.getText());
                 if(itemTitle.getText().equals(productName)){
@@ -179,15 +171,13 @@ public class Home {
                 int currentQuantity = Integer.parseInt(quantityOfProduct.getText());
                 if(currentQuantity < quantity){
                     for(int i=currentQuantity; i < quantity; i++){
-                        Thread.sleep(2000);
+                        Thread.sleep(4000);
                         item.findElement(By.xpath(".//button[2]")).click();
-                       
                     }
                 }else if(currentQuantity > quantity){
                     for(int i=currentQuantity; i > quantity; i--){
-                        Thread.sleep(2000);
+                        Thread.sleep(4000);
                         item.findElement(By.xpath(".//button[1]")).click();
-
                     }
                 }
                 return true;
@@ -207,6 +197,7 @@ public class Home {
             return false;
         }
     }
+
 
     /*
      * Return Boolean denoting if the cart contains items as expected

@@ -47,12 +47,7 @@ public class Login {
         login_button.click();
 
         // Wait for Login action to complete
-        
-		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout((Duration.ofSeconds(30)))
-		.pollingEvery(Duration.ofMillis(250)).ignoring(NoSuchElementException.class);
-        // wait.until(ExpectedConditions.urlContains(".app"));
-        wait.until(ExpectedConditions.invisibilityOf(login_button));
-
+        Thread.sleep(5000);
 
         return this.VerifyUserLoggedIn(Username);
     }

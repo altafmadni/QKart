@@ -83,6 +83,7 @@ public class SearchResult {
              * element, set status = true , else set to false
              */
             Thread.sleep(2000);
+            
             WebElement sizeChart = parentElement.findElement(By.tagName("Button"));
             status = sizeChart.getText().equals("SIZE CHART");
             return status;
@@ -124,6 +125,7 @@ public class SearchResult {
                 }
             }
             //     System.out.println(status);
+            Thread.sleep(5000);
             List<WebElement> tableRows=driver.findElements(By.xpath("//table//tbody//tr"));
                       System.out.println(status);
                 for(int i=0; i<tableRows.size(); i++ ){

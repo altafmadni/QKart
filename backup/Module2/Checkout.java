@@ -32,12 +32,11 @@ public class Checkout {
              * Click on the "Add new address" button, enter the addressString in the address
              * text box and click on the "ADD" button to save the address
              */
-            
+            Thread.sleep(2000);
             driver.findElement(By.id("add-new-btn")).click();
             driver.findElement(By.xpath("//textarea[1]")).sendKeys(addresString);
             driver.findElement(By.xpath("//button[text()='Add']")).click();
-		    WebDriverWait wait = new WebDriverWait(driver, 30);
-		    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='address-item not-selected MuiBox-root css-0']")));
+
 
 
             return false;
@@ -58,6 +57,8 @@ public class Checkout {
              * Iterate through all the address boxes to find the address box with matching
              * text, addressToSelect and click on it
              */
+            Thread.sleep(3000);
+
             List<WebElement> addresses = driver.findElements(By.xpath("//div[@class='address-item not-selected MuiBox-root css-0']"));
             System.out.println(addresses.size());
             for(WebElement address : addresses){
@@ -85,7 +86,7 @@ public class Checkout {
     public Boolean placeOrder() {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
-            // Find the "PLACE ORDER" button and click on 
+            // Find the "PLACE ORDER" button and click on it
             WebElement placeOrderButton = driver.findElement(By.xpath("//button[text()='PLACE ORDER']"));
             placeOrderButton.click();
             return true;
@@ -102,7 +103,6 @@ public class Checkout {
     public Boolean verifyInsufficientBalanceMessage() {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 07: MILESTONE 6
-            Thread.sleep(2000);
             WebElement insufficientBalAlert = driver.findElement(By.id("notistack-snackbar"));
             if(insufficientBalAlert.getText().equals("You do not have enough balance in your wallet for this purchase")){
                 return true;
