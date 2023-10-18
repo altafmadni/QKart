@@ -7,7 +7,7 @@ build
 app/chromedriver.log
 app/bin
 app/screenshots
-screenshots
+
 HELP.md
 .gradle
 /build/
